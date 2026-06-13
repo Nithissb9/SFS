@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Factory Solution — ระบบโรงงานอัจฉริยะ</title>
+<meta name="description" content="พัฒนาระบบโรงงาน Dashboard, CMMS, Traceability โดยผู้มีประสบการณ์จริงในโรงงาน">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#0d0d1a;color:#f0eeff;font-family:'Segoe UI',Tahoma,sans-serif;line-height:1.6}
+a{text-decoration:none}
+
+/* HERO */
+.hero{text-align:center;padding:4rem 1.5rem 3rem;background:radial-gradient(ellipse at 50% 0%,#1a1030 0%,#0d0d1a 70%)}
+.chip{display:inline-block;font-size:11px;font-weight:700;letter-spacing:3px;padding:6px 18px;border-radius:20px;background:#6c47ff22;color:#9b82ff;border:1px solid #6c47ff55;margin-bottom:1.25rem}
+.hero h1{font-size:clamp(22px,4vw,36px);font-weight:700;color:#f0eeff;line-height:1.35;margin-bottom:.75rem}
+.hero h1 span{color:#6c47ff}
+.hero p{font-size:15px;color:#7b7a99;max-width:520px;margin:0 auto 2rem}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;background:#6c47ff;color:#fff;font-size:15px;font-weight:600;padding:.75rem 2rem;border-radius:12px;transition:background .2s}
+.hero-cta:hover{background:#7d5bff}
+.hero-cta svg{width:18px;height:18px;fill:currentColor}
+
+/* SECTIONS */
+.section{padding:3rem 1.5rem;max-width:900px;margin:0 auto}
+.sec-label{font-size:11px;font-weight:700;letter-spacing:3px;color:#6c47ff;text-align:center;margin-bottom:1.25rem;text-transform:uppercase}
+.divider{height:1px;background:#2a2a44;max-width:900px;margin:0 auto}
+
+/* PAIN */
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.pain-item{background:#1a1a2e;border:1px solid #2a2a44;border-radius:10px;padding:.85rem 1rem;font-size:13px;color:#9b8fc0;display:flex;align-items:center;gap:10px}
+.pain-item .dot{width:6px;height:6px;border-radius:50%;background:#ff6b6b;flex-shrink:0}
+
+/* MODULES */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.fcard{background:#1a1a2e;border:1px solid #2a2a44;border-top-width:3px;border-radius:14px;padding:1.25rem;cursor:pointer;transition:all .2s;text-align:left;width:100%}
+.fcard:hover{transform:translateY(-3px);background:#201a38}
+.fcard .fi{font-size:28px;margin-bottom:.75rem;display:block}
+.fcard .ft{font-size:13px;font-weight:700;color:#f0eeff;margin-bottom:4px}
+.fcard .fs{font-size:11px;color:#7b7a99}
+.fcard.c1{border-top-color:#6c47ff}
+.fcard.c2{border-top-color:#00d4aa}
+.fcard.c3{border-top-color:#378add}
+.fcard.c4{border-top-color:#ffb347}
+.fcard.c5{border-top-color:#ff6b9d}
+
+/* STATS */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.scard{background:#1a1a2e;border:1px solid #2a2a44;border-radius:12px;padding:1.5rem;text-align:center}
+.snum{font-size:30px;font-weight:700}
+.slabel{font-size:12px;color:#7b7a99;margin-top:6px}
+
+/* PACKAGES */
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.pcard{background:#1a1a2e;border:1px solid #2a2a44;border-radius:16px;padding:1.5rem;cursor:pointer;transition:all .2s}
+.pcard:hover{transform:translateY(-3px)}
+.pcard.featured{border:2px solid #00d4aa;background:#0d2420}
+.pcard.ent{border-color:#ffb34766}
+.rec-pill{display:inline-block;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;background:#00d4aa22;color:#00d4aa;border:1px solid #00d4aa55;margin-bottom:.6rem}
+.pname{font-size:16px;font-weight:700;margin-bottom:.4rem}
+.plist{font-size:12px;color:#9b8fc0;line-height:2.1;margin-bottom:1rem}
+.ptag{display:inline-block;font-size:10px;padding:4px 12px;border-radius:20px;background:#ffffff0f;color:#7b7a99}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.why-item{background:#1a1a2e;border:1px solid #2a2a44;border-radius:10px;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px;font-size:13px;color:#c0bfdf}
+.why-icon{font-size:20px;flex-shrink:0}
+
+/* CTA */
+.cta-section{padding:3rem 1.5rem;text-align:center}
+.cta-box{background:linear-gradient(135deg,#1a1030,#0d1a2a);border:1px solid #2a2a44;border-radius:20px;padding:3rem 2rem;max-width:580px;margin:0 auto}
+.cta-box h2{font-size:22px;font-weight:700;color:#f0eeff;margin-bottom:.75rem}
+.cta-box p{font-size:14px;color:#7b7a99;margin-bottom:2rem}
+.cta-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.btn-fb{display:inline-flex;align-items:center;gap:10px;background:#6c47ff;color:#fff;font-size:15px;font-weight:700;padding:.85rem 2.5rem;border-radius:12px;transition:background .2s}
+.btn-fb:hover{background:#7d5bff}
+.btn-fb svg{width:20px;height:20px;fill:currentColor}
+.btn-line{display:inline-flex;align-items:center;gap:10px;background:#00b900;color:#fff;font-size:14px;font-weight:600;padding:.7rem 2rem;border-radius:12px;transition:opacity .2s}
+.btn-line:hover{opacity:.85}
+.free-note{font-size:12px;color:#7b7a99;margin-top:.5rem}
+
+/* FOOTER */
+footer{text-align:center;padding:1.5rem;border-top:1px solid #2a2a44;font-size:12px;color:#4a4a6a}
+
+/* OVERLAY */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:999;align-items:center;justify-content:center;padding:1rem}
+.overlay.open{display:flex}
+.modal{background:#16162a;border:1px solid #2a2a44;border-radius:18px;max-width:500px;width:100%;max-height:85vh;overflow-y:auto}
+.mhead{padding:1.5rem;border-bottom:1px solid #2a2a44;display:flex;align-items:center;gap:12px;position:sticky;top:0;background:#16162a}
+.mhead .mi{font-size:28px}
+.mhead h3{font-size:17px;font-weight:700;color:#f0eeff;flex:1}
+.mclose{background:none;border:none;color:#7b7a99;font-size:22px;cursor:pointer;padding:4px;line-height:1}
+.mbody{padding:1.5rem}
+.mdesc{font-size:13px;color:#9b8fc0;line-height:1.8;margin-bottom:1.25rem}
+.mbenefit{display:flex;align-items:center;gap:8px;background:#00d4aa11;border:1px solid #00d4aa33;border-radius:8px;padding:.75rem 1rem;margin-bottom:1.25rem;font-size:13px;color:#00d4aa}
+.mlist-title{font-size:11px;font-weight:700;color:#7b7a99;letter-spacing:2px;margin-bottom:.6rem}
+.mlist{list-style:none}
+.mlist li{font-size:13px;color:#9b8fc0;padding:8px 0;display:flex;align-items:center;gap:10px;border-bottom:1px solid #2a2a3a}
+.mlist li:last-child{border:none}
+.mlist li .ck{color:#00d4aa;font-size:16px;flex-shrink:0}
+.mcta{display:block;width:100%;margin-top:1.25rem;padding:.85rem;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;text-align:center;transition:opacity .2s}
+.mcta:hover{opacity:.85}
+
+@media(max-width:600px){
+  .hero{padding:3rem 1rem 2rem}
+  .feat-grid{grid-template-columns:1fr 1fr}
+  .pkg-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="chip">SMART FACTORY SOLUTION</div>
+  <h1>ลดงานเอกสาร เพิ่ม<span>ประสิทธิภาพโรงงาน</span><br>ด้วยระบบที่เข้าใจหน้างานจริง</h1>
+  <p>พัฒนาโดยผู้มีประสบการณ์จริงในโรงงานหลายอุตสาหกรรม ทั้งไฟฟ้า เครื่องกล และ PLC — ไม่ใช่แค่โปรแกรมเมอร์</p>
+  <a href="https://m.me/naiball.nithis.2025" target="_blank" rel="noopener" class="hero-cta">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.145 2 11.259c0 2.813 1.321 5.329 3.396 7.01V22l3.084-1.695a10.7 10.7 0 0 0 3.52.587c5.523 0 10-4.145 10-9.259S17.523 2 12 2zm1.07 12.482-2.55-2.72-4.976 2.72 5.474-5.808 2.612 2.72 4.914-2.72-5.474 5.808z"/></svg>
+    ปรึกษาฟรีทาง Messenger
+  </a>
+</section>
+
+<div class="divider"></div>
+
+<!-- PAIN -->
+<section class="section">
+  <div class="sec-label">⚠ โรงงานของคุณเจอปัญหาเหล่านี้ไหม</div>
+  <div class="pain-grid">
+    <div class="pain-item"><div class="dot"></div>ข้อมูลกระจายหลาย Excel</div>
+    <div class="pain-item"><div class="dot"></div>พนักงานยังจดกระดาษ</div>
+    <div class="pain-item"><div class="dot"></div>หารายงานย้อนหลังลำบาก</div>
+    <div class="pain-item"><div class="dot"></div>KPI อัปเดตช้า</div>
+    <div class="pain-item"><div class="dot"></div>Audit ทีไร ปวดหัวทุกครั้ง</div>
+    <div class="pain-item"><div class="dot"></div>ผู้บริหารมองภาพรวมไม่ออก</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MODULES -->
+<section class="section">
+  <div class="sec-label">🔧 กดดูรายละเอียดแต่ละโมดูล</div>
+  <div class="feat-grid">
+    <button class="fcard c1" onclick="showModal('form')" aria-label="ดู Digital Form">
+      <span class="fi">📱</span>
+      <div class="ft">Digital Form</div>
+      <div class="fs">เปลี่ยนกระดาษเป็นออนไลน์</div>
+    </button>
+    <button class="fcard c2" onclick="showModal('maint')" aria-label="ดู Maintenance System">
+      <span class="fi">🔧</span>
+      <div class="ft">Maintenance</div>
+      <div class="fs">แจ้งซ่อมผ่านมือถือ</div>
+    </button>
+    <button class="fcard c3" onclick="showModal('dash')" aria-label="ดู Executive Dashboard">
+      <span class="fi">📊</span>
+      <div class="ft">Executive Dashboard</div>
+      <div class="fs">ภาพรวม Real-time</div>
+    </button>
+    <button class="fcard c4" onclick="showModal('trace')" aria-label="ดู Traceability">
+      <span class="fi">🔍</span>
+      <div class="ft">Traceability</div>
+      <div class="fs">สอบกลับได้ไม่กี่วินาที</div>
+    </button>
+    <button class="fcard c5" onclick="showModal('ai')" aria-label="ดู AI for Factory">
+      <span class="fi">🤖</span>
+      <div class="ft">AI for Factory</div>
+      <div class="fs">วิเคราะห์ข้อมูลอัตโนมัติ</div>
+    </button>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STATS -->
+<section class="section">
+  <div class="sec-label">📈 ผลลัพธ์ที่ลูกค้าได้รับจริง</div>
+  <div class="stat-grid">
+    <div class="scard"><div class="snum" style="color:#6c47ff">70–90%</div><div class="slabel">ลดเวลาทำรายงาน</div></div>
+    <div class="scard"><div class="snum" style="color:#00d4aa">80%</div><div class="slabel">ลดการใช้กระดาษ</div></div>
+    <div class="scard"><div class="snum" style="color:#ffb347">15%</div><div class="slabel">ลดเวลาเครื่องหยุด</div></div>
+    <div class="scard"><div class="snum" style="color:#ff6b9d">10 นาที</div><div class="slabel">จากเดิม 2 ชม./วัน</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PACKAGES -->
+<section class="section">
+  <div class="sec-label">💼 เลือกแพ็กเกจที่เหมาะกับคุณ</div>
+  <div class="pkg-grid">
+    <div class="pcard" onclick="showModal('pkg_starter')" role="button" tabindex="0">
+      <div class="pname" style="color:#6c47ff">Starter</div>
+      <div class="plist">
+        ✓ Digital Form ทุกประเภท<br>
+        ✓ Dashboard พื้นฐาน<br>
+        ✓ KPI 3–5 ตัว<br>
+        ✓ Report อัตโนมัติ<br>
+        ✓ Training + Support 1 เดือน
+      </div>
+      <span class="ptag">SME เริ่มต้น · ส่งมอบ 2–3 สัปดาห์</span>
+    </div>
+    <div class="pcard featured" onclick="showModal('pkg_pro')" role="button" tabindex="0">
+      <div class="rec-pill">★ แนะนำ</div>
+      <div class="pname" style="color:#00d4aa">Professional</div>
+      <div class="plist">
+        ✓ ทุกอย่างใน Starter<br>
+        ✓ Maintenance System (CMMS)<br>
+        ✓ Dashboard หลายหน้า<br>
+        ✓ Traceability เต็มรูปแบบ<br>
+        ✓ LINE Notification
+      </div>
+      <span class="ptag" style="background:#00d4aa22;color:#00d4aa">โรงงานขนาดกลาง · 4–6 สัปดาห์</span>
+    </div>
+    <div class="pcard ent" onclick="showModal('pkg_ent')" role="button" tabindex="0">
+      <div class="pname" style="color:#ffb347">Enterprise</div>
+      <div class="plist">
+        ✓ ระบบ Custom เฉพาะโรงงาน<br>
+        ✓ เชื่อมต่อ PLC / ERP<br>
+        ✓ AI วิเคราะห์ขั้นสูง<br>
+        ✓ Multi-site Dashboard<br>
+        ✓ Support 3+ เดือน
+      </div>
+      <span class="ptag" style="background:#ffb34722;color:#ffb347">โรงงานใหญ่ · นัดสำรวจก่อน</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY -->
+<section class="section">
+  <div class="sec-label">🏆 ทำไมต้องเลือกเรา</div>
+  <div class="why-grid">
+    <div class="why-item"><span class="why-icon">🏭</span>เข้าใจหน้างานโรงงานจริง ไม่ต้องอธิบายซ้ำ</div>
+    <div class="why-item"><span class="why-icon">⚙️</span>เชี่ยวชาญไฟฟ้า เครื่องกล และ PLC</div>
+    <div class="why-item"><span class="why-icon">🎯</span>ระบบ Custom ตรงความต้องการ ไม่ใช่สำเร็จรูป</div>
+    <div class="why-item"><span class="why-icon">🤖</span>ใช้ AI ช่วยพัฒนา เร็วกว่า คุ้มกว่า</div>
+    <div class="why-item"><span class="why-icon">📋</span>ข้อมูลทวนสอบได้ รองรับ Audit และ GMP</div>
+    <div class="why-item"><span class="why-icon">💰</span>ลงทุนน้อยกว่า ERP หลายเท่า</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-box">
+    <h2>ปรึกษาฟรี ไม่มีค่าใช้จ่าย</h2>
+    <p>วิเคราะห์ปัญหาโรงงานของคุณ พร้อมเสนอแนวทางพัฒนา ภายใน 30 นาที</p>
+    <div class="cta-wrap">
+      <a href="https://m.me/naiball.nithis.2025" target="_blank" rel="noopener" class="btn-fb">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.145 2 11.259c0 2.813 1.321 5.329 3.396 7.01V22l3.084-1.695a10.7 10.7 0 0 0 3.52.587c5.523 0 10-4.145 10-9.259S17.523 2 12 2zm1.07 12.482-2.55-2.72-4.976 2.72 5.474-5.808 2.612 2.72 4.914-2.72-5.474 5.808z"/></svg>
+        ทักมาทาง Facebook Messenger
+      </a>
+      <div class="free-note">กดแล้วเปิด Messenger ทันที · ตอบเร็วภายในวันนี้</div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2025 Smart Factory Solution · พัฒนาโดยผู้เชี่ยวชาญด้านวิศวกรรมและระบบโรงงาน</footer>
+
+<!-- OVERLAY -->
+<div id="ov" class="overlay" onclick="if(event.target===this)closeModal()" role="dialog" aria-modal="true">
+  <div id="mbox" class="modal"></div>
+</div>
+
+<script>
+const D={
+  form:{accent:'#6c47ff',icon:'📱',title:'Digital Form',desc:'เปลี่ยนแบบฟอร์มกระดาษทุกใบให้เป็นดิจิทัล พนักงานหน้างานกรอกได้ทันทีผ่านมือถือหรือ Tablet ข้อมูลเข้าระบบ Real-time ไม่ผิดพลาด ไม่สูญหาย',benefit:'ลดเวลาบันทึกข้อมูล 60–80%',items:['Inspection / Check Sheet','Production Record','Quality Record','กรอกผ่านมือถือทุกที่ทุกเวลา']},
+  maint:{accent:'#00d4aa',icon:'🔧',title:'Maintenance System',desc:'ระบบแจ้งซ่อมและ PM ครบวงจร ช่างรับงานได้ทันที ติดตามสถานะ Real-time วิเคราะห์ Downtime เพื่อวางแผนป้องกันล่วงหน้า ประวัติเครื่องจักรครบทุก Asset',benefit:'ลดเวลาเครื่องหยุดได้ถึง 15%',items:['แจ้งงานซ่อมผ่านมือถือ','PM Schedule อัตโนมัติ','ประวัติเครื่องจักรครบ','Downtime Analysis']},
+  dash:{accent:'#378add',icon:'📊',title:'Executive Dashboard',desc:'Dashboard สำหรับผู้บริหารและหัวหน้างาน เห็นสถานะโรงงานทั้งหมดในหน้าเดียว ตัดสินใจได้ทันทีโดยไม่ต้องรอรายงาน ดูได้ทุกที่ผ่านมือถือ',benefit:'ผู้บริหารเห็นภาพรวมได้ทุกที่ทุกเวลา',items:['OEE Real-time','KPI ทุกหน่วยงาน','Production vs Target','Defect Tracking']},
+  trace:{accent:'#ffb347',icon:'🔍',title:'Traceability System',desc:'ระบบสอบกลับข้อมูลการผลิตทุก Lot ทุก Batch ค้นหาได้ภายในไม่กี่วินาที รองรับมาตรฐาน GMP, ISO และการ Audit ทุกรูปแบบ ป้องกัน Cross-contamination',benefit:'ผ่าน Audit ง่าย ลดความเสี่ยง Recall',items:['Lot / Batch Tracking','ค้นหาย้อนหลังได้ทันที','รองรับ GMP / ISO','ป้องกัน Cross-contamination']},
+  ai:{accent:'#ff6b9d',icon:'🤖',title:'AI for Factory',desc:'จุดที่ทำให้แตกต่างจากบริษัท Automation ทั่วไป นำ AI มาช่วยวิเคราะห์ข้อมูล สรุปรายงาน และตอบคำถามเกี่ยวกับเครื่องจักรได้ทันที คู่แข่งส่วนใหญ่ยังไม่มีฟีเจอร์นี้',benefit:'จุดขายที่คู่แข่งส่วนใหญ่ยังไม่มี',items:['AI วิเคราะห์ Downtime','AI สรุปรายงานประจำวัน','AI วิเคราะห์ KPI','AI Chatbot ตอบคู่มือเครื่องจักร']},
+  pkg_starter:{accent:'#6c47ff',icon:'📦',title:'Starter Package',timeline:'ส่งมอบภายใน 2–3 สัปดาห์',desc:'เหมาะสำหรับโรงงาน SME ที่ต้องการเริ่มต้น Digital Transformation โดยไม่ต้องลงทุนสูง เห็นผลได้เร็ว เริ่มใช้งานได้จริงภายในไม่กี่สัปดาห์',items:['Digital Form ทุกประเภท','Dashboard พื้นฐาน 1 หน้า','KPI หลัก 3–5 ตัว','Report อัตโนมัติ','Training ทีมงาน','Support 1 เดือน']},
+  pkg_pro:{accent:'#00d4aa',icon:'⭐',title:'Professional Package',timeline:'ส่งมอบภายใน 4–6 สัปดาห์',desc:'แพ็กเกจที่ครอบคลุมที่สุดสำหรับโรงงานขนาดกลาง ครบทั้งระบบบันทึก วิเคราะห์ แจ้งเตือน และสอบกลับ รองรับการ Audit ทุกมาตรฐาน',items:['ทุกอย่างใน Starter','Maintenance System (CMMS)','Dashboard หลายหน้า','Traceability เต็มรูปแบบ','LINE Notification','KPI + Production Tracking']},
+  pkg_ent:{accent:'#ffb347',icon:'🏭',title:'Enterprise Package',timeline:'นัดสำรวจโรงงานก่อนเสนอราคา',desc:'สำหรับโรงงานขนาดใหญ่ที่ต้องการระบบเฉพาะ เชื่อมต่อ PLC เครื่องจักร หรือ ERP ที่มีอยู่แล้ว ออกแบบตาม Process จริงของโรงงาน',items:['ระบบ Custom เฉพาะโรงงาน','เชื่อมต่อ PLC / Sensor','เชื่อมต่อ ERP ที่มีอยู่','AI วิเคราะห์ขั้นสูง','Multi-site Dashboard','Training + Support 3+ เดือน']}
+};
+function showModal(k){
+  const d=D[k],isPkg=k.startsWith('pkg_');
+  const timelineHtml=isPkg?`<div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;font-size:13px;color:#7b7a99">⏱ ${d.timeline}</div>`:'';
+  const benefitHtml=!isPkg?`<div class="mbenefit">✅ ${d.benefit}</div>`:'';
+  document.getElementById('mbox').innerHTML=`
+    <div class="mhead">
+      <span class="mi">${d.icon}</span>
+      <h3>${d.title}</h3>
+      <button class="mclose" onclick="closeModal()" aria-label="ปิด">✕</button>
+    </div>
+    <div class="mbody">
+      <p class="mdesc">${d.desc}</p>
+      ${timelineHtml}${benefitHtml}
+      <div class="mlist-title">${isPkg?'รายการที่รวมอยู่':'ฟีเจอร์หลัก'}</div>
+      <ul class="mlist">${d.items.map(i=>`<li><span class="ck">✓</span>${i}</li>`).join('')}</ul>
+      <a href="https://m.me/naiball.nithis.2025" target="_blank" rel="noopener" class="mcta" style="background:${d.accent};color:#fff;display:block;text-decoration:none">สอบถาม ${d.title} ทาง Messenger →</a>
+    </div>`;
+  document.getElementById('ov').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('ov').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+document.querySelectorAll('.pcard[role=button]').forEach(el=>{
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')el.click()});
+});
+</script>
+</body>
+</html>
